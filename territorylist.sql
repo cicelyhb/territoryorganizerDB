@@ -69,7 +69,8 @@ SELECT 'Territory' Territory,
 	   Firstname,
 	   IFNULL(MiddleInit, '') MiddleInit,
 	   Lastname,
-	   IFNULL(GroupName, '') GroupName
+	   IFNULL(GroupName, '') GroupName,
+       IFNULL(cLetter,0) Letter
 FROM listTable2 tc 
      INNER JOIN ministryapp.territorycard tcd ON tcd.CongregationNumber=p_CongregationNumber AND tc.TerritoryNumber=tcd.TerritoryNumber
      LEFT JOIN ministryapp.territorycheckout tck ON tc.TerritoryNumber=tck.TerritoryNumber AND tck.CongregationNumber = p_CongregationNumber AND tck.ExpiredDate >=now()
@@ -98,7 +99,19 @@ FROM listTable2 tc
 			  TerritoryNumber   
  ) tp
   ON tc.TerritoryNumber=tp.TerritoryNumber AND tp.CongregationNumber  = p_CongregationNumber
-  ORDER BY tcd.iSort,tcd.TerritoryNumber;
+      LEFT JOIN 
+ (
+   SELECT   count(1) cLetter,
+   			CongregationNumber,
+			TerritoryNumber
+   FROM ministryapp.territory
+   WHERE Type='WL'
+   GROUP BY   CongregationNumber,
+			  TerritoryNumber   
+ ) tl
+  ON tc.TerritoryNumber=tl.TerritoryNumber AND tl.CongregationNumber  = p_CongregationNumber
+  
+  ORDER BY tcd.iSort,tcd.TerritoryNumber;  
 
 
 DROP TEMPORARY TABLE IF EXISTS listTable1;
