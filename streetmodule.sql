@@ -30,7 +30,6 @@ SELECT  IFNULL(t.AddressGUID,'') AddressGUID,
 		IFNULL(t.bUnit,'') bUnit,    
 		IFNULL(t.Phone,'') Phone,                                                                               
 		IFNULL(t.Building,'') Building,
-		IFNULL(t.PhoneType,'') PhoneType,
 		IFNULL(t.LetterType,'') LetterType         
 FROM ministryapp.streets s
 INNER JOIN ministryapp.territory t ON s.AddressGUID=t.AddressGUID
@@ -62,7 +61,8 @@ SELECT  IFNULL(t.AddressGUID,'') AddressGUID,
 		IFNULL(t.bMulti,'') bMulti,
 		IFNULL(t.bUnit,'') bUnit,    
 		IFNULL(t.Phone,'') Phone,                                                                               
-		IFNULL(t.Building,'') Building    
+		IFNULL(t.Building,'') Building,
+		IFNULL(t.LetterType,'') LetterType      
 FROM ministryapp.streets s
 INNER JOIN ministryapp.territory t ON s.AddressGUID=t.AddressGUID
 INNER JOIN ministryapp.language l  ON t.Language=l.LanguageGUID
@@ -95,7 +95,8 @@ SELECT  IFNULL(t.AddressGUID,'') AddressGUID,
 		IFNULL(t.bMulti,'') bMulti,
 		IFNULL(t.bUnit,'') bUnit,    
 		IFNULL(t.Phone,'') Phone,                                                                               
-		IFNULL(t.Building,'') Building  
+		IFNULL(t.Building,'') Building,
+		IFNULL(t.LetterType,'') LetterType    
 FROM ministryapp.streets s
 INNER JOIN ministryapp.territory t ON s.AddressGUID=t.AddressGUID
 INNER JOIN ministryapp.language l  ON t.Language=l.LanguageGUID
@@ -104,6 +105,39 @@ WHERE 	CongregationNumber = p_CongregationNumber AND
 		Street= p_Street AND 
 		StreetSuffix = p_StreetSuffix AND
         t.bPhone = 1
+ORDER BY t.FormattedAddress;
+end;
+end if;
+
+if (detail_type = '4') then
+begin 
+SELECT  IFNULL(t.AddressGUID,'') AddressGUID,
+        IFNULL(t.TerritoryNumber,'') TerritoryNumber, 
+		IFNULL(t.Latitude,'') Latitude ,
+		IFNULL(t.Longitude,'') Longitude,
+		IFNULL(t.FormattedAddress,'') FormattedAddress,
+		IFNULL(t.Type,'') Type,
+		IFNULL(t.Resident,'') Resident,
+		IFNULL(t.PhoneType,'') PhoneType,
+		IFNULL(l.LanguageName,'') Language,
+		IFNULL(t.InitialDate,'') InitialDate,
+		IFNULL(t.Notes,'') Notes,
+		IFNULL(t.DateModified,'') DateModified,
+		IFNULL(t.bPhone,'') bPhone,
+		IFNULL(t.Unit,'') Unit,
+		IFNULL(t.bMulti,'') bMulti,
+		IFNULL(t.bUnit,'') bUnit,    
+		IFNULL(t.Phone,'') Phone,                                                                               
+		IFNULL(t.Building,'') Building,
+		IFNULL(t.LetterType,'') LetterType    
+FROM ministryapp.streets s
+INNER JOIN ministryapp.territory t ON s.AddressGUID=t.AddressGUID
+INNER JOIN ministryapp.language l  ON t.Language=l.LanguageGUID
+WHERE 	CongregationNumber = p_CongregationNumber AND 
+		TerritoryNumber = p_TerritoryNumber AND 
+		Street= p_Street AND 
+		StreetSuffix = p_StreetSuffix AND
+        t.Type = 'WL' 
 ORDER BY t.FormattedAddress;
 end;
 end if;
