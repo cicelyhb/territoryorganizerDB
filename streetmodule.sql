@@ -30,7 +30,9 @@ SELECT  IFNULL(t.AddressGUID,'') AddressGUID,
 		IFNULL(t.bUnit,'') bUnit,    
 		IFNULL(t.Phone,'') Phone,                                                                               
 		IFNULL(t.Building,'') Building,
-		IFNULL(t.LetterType,'') LetterType         
+		IFNULL(t.LetterType,'') LetterType,
+		IFNULL(t.bLetter,'') bLetter,
+		IFNULL(t.bTouched,'') bTouched       
 FROM ministryapp.streets s
 INNER JOIN ministryapp.territory t ON s.AddressGUID=t.AddressGUID
 INNER JOIN ministryapp.language l  ON t.Language=l.LanguageGUID
@@ -62,7 +64,9 @@ SELECT  IFNULL(t.AddressGUID,'') AddressGUID,
 		IFNULL(t.bUnit,'') bUnit,    
 		IFNULL(t.Phone,'') Phone,                                                                               
 		IFNULL(t.Building,'') Building,
-		IFNULL(t.LetterType,'') LetterType      
+		IFNULL(t.LetterType,'') LetterType,
+		IFNULL(t.bLetter,'') bLetter,
+		IFNULL(t.bTouched,'') bTouched         
 FROM ministryapp.streets s
 INNER JOIN ministryapp.territory t ON s.AddressGUID=t.AddressGUID
 INNER JOIN ministryapp.language l  ON t.Language=l.LanguageGUID
@@ -96,7 +100,9 @@ SELECT  IFNULL(t.AddressGUID,'') AddressGUID,
 		IFNULL(t.bUnit,'') bUnit,    
 		IFNULL(t.Phone,'') Phone,                                                                               
 		IFNULL(t.Building,'') Building,
-		IFNULL(t.LetterType,'') LetterType    
+		IFNULL(t.LetterType,'') LetterType,
+		IFNULL(t.bLetter,'') bLetter,
+		IFNULL(t.bTouched,'') bTouched      
 FROM ministryapp.streets s
 INNER JOIN ministryapp.territory t ON s.AddressGUID=t.AddressGUID
 INNER JOIN ministryapp.language l  ON t.Language=l.LanguageGUID
@@ -129,7 +135,9 @@ SELECT  IFNULL(t.AddressGUID,'') AddressGUID,
 		IFNULL(t.bUnit,'') bUnit,    
 		IFNULL(t.Phone,'') Phone,                                                                               
 		IFNULL(t.Building,'') Building,
-		IFNULL(t.LetterType,'') LetterType    
+		IFNULL(t.LetterType,'') LetterType,
+		IFNULL(t.bLetter,'') bLetter,
+		IFNULL(t.bTouched,'') bTouched       
 FROM ministryapp.streets s
 INNER JOIN ministryapp.territory t ON s.AddressGUID=t.AddressGUID
 INNER JOIN ministryapp.language l  ON t.Language=l.LanguageGUID
