@@ -70,7 +70,8 @@ SELECT 'Territory' Territory,
 	   IFNULL(MiddleInit, '') MiddleInit,
 	   Lastname,
 	   IFNULL(GroupName, '') GroupName,
-       IFNULL(cLetter,0) Letter
+       IFNULL(cLetter,0) Letter,
+       IFNULL(cNH,0) NH      
 FROM listTable2 tc 
      INNER JOIN ministryapp.territorycard tcd ON tcd.CongregationNumber=p_CongregationNumber AND tc.TerritoryNumber=tcd.TerritoryNumber
      LEFT JOIN ministryapp.territorycheckout tck ON tc.TerritoryNumber=tck.TerritoryNumber AND tck.CongregationNumber = p_CongregationNumber AND tck.ExpiredDate >=now()
@@ -110,6 +111,17 @@ FROM listTable2 tc
 			  TerritoryNumber   
  ) tl
   ON tc.TerritoryNumber=tl.TerritoryNumber AND tl.CongregationNumber  = p_CongregationNumber
+      LEFT JOIN 
+ (
+   SELECT   count(1) cNH,
+   			CongregationNumber,
+			TerritoryNumber
+   FROM ministryapp.territory
+   WHERE Type='NH' AND bTouched=1
+   GROUP BY   CongregationNumber,
+			  TerritoryNumber   
+ ) tnh
+  ON tc.TerritoryNumber=tnh.TerritoryNumber AND tnh.CongregationNumber  = p_CongregationNumber  
   
   ORDER BY tcd.iSort,tcd.TerritoryNumber;  
 
