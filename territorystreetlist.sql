@@ -64,7 +64,7 @@ ORDER BY Street
 
 
 
-SELECT a.Street,a.StreetSuffix, CONVERT((COALESCE(Modified,0)/Total) * 100,SIGNED) Percentage, CONVERT(COALESCE(Modified,0),SIGNED) Modified ,Total, IFNULL(DNC,0) DNC, IFNULL(cPhone,0) Phone, IFNULL(cLetter,0) Letter
+SELECT a.Street,a.StreetSuffix, CONVERT((COALESCE(Modified,0)/Total) * 100,SIGNED) Percentage, CONVERT(COALESCE(Modified,0),SIGNED) Modified ,Total, IFNULL(DNC,0) DNC, IFNULL(cPhone,0) Phone, IFNULL(cLetter,0) Letter, IFNULL(cNH,0) NH
 FROM listTable1 a 
 LEFT JOIN listTable2 b ON a.Street=b.Street AND a.StreetSuffix=b.StreetSuffix
 LEFT JOIN 
@@ -109,6 +109,20 @@ GROUP BY   CongregationNumber,
            StreetSuffix    
 ) e           
 ON a.Street=e.Street AND a.StreetSuffix=e.StreetSuffix
+LEFT JOIN 
+ (    
+SELECT 			Street
+			   ,StreetSuffix
+	           ,count(1) cNH
+FROM ministryapp.streets s
+INNER JOIN ministryapp.territory t ON s.AddressGUID=t.AddressGUID
+WHERE Type = 'NH' AND bTouched = 1 AND CongregationNumber = p_CongregationNumber AND TerritoryNumber = p_TerritoryNumber
+GROUP BY   CongregationNumber,
+		   TerritoryNumber,
+           Street,
+           StreetSuffix    
+) f           
+ON a.Street=f.Street AND a.StreetSuffix=f.StreetSuffix
 ORDER BY a.RID;
 
 DROP TEMPORARY TABLE IF EXISTS listTable1;
