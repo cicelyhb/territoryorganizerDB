@@ -75,7 +75,8 @@ SET imax1 = (SELECT max(rid) FROM xmlTerritory);
 			,concat('<Building>',COALESCE(Building,''),'</Building>') 
 			,concat('<bTouched>',COALESCE(bTouched,''),'</bTouched>') 
 			,concat('<bLetter>',COALESCE(bLetter,''),'</bLetter>')    
-			,concat('<LetterType>',COALESCE(LetterType,''),'</LetterType>')             
+			,concat('<LetterType>',COALESCE(LetterType,''),'</LetterType>')  
+			,concat('<iSubmit>',COALESCE(iSubmit,''),'</iSubmit>')              
 			,'</Address>') Territory       
 		FROM ministryapp.territory 
 		WHERE CongregationNumber = p_CongregationNumber AND 
@@ -202,7 +203,8 @@ SET imax1 = (SELECT max(rid) FROM xmlTerritory);
 			,concat('<Building>',COALESCE(Building,''),'</Building>')    
 			,concat('<bTouched>',COALESCE(bTouched,''),'</bTouched>')     
 			,concat('<bLetter>',COALESCE(bLetter,''),'</bLetter>')    
-			,concat('<LetterType>',COALESCE(LetterType,''),'</LetterType>')             
+			,concat('<LetterType>',COALESCE(LetterType,''),'</LetterType>')    
+			,concat('<iSubmit>',COALESCE(iSubmit,''),'</iSubmit>')             
 			,'</Address>') Territory       
 		FROM ministryapp.territory 
 		WHERE CongregationNumber = p_CongregationNumber AND 

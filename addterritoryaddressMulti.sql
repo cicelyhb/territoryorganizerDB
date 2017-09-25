@@ -58,8 +58,8 @@ begin
 		SET vLanguage0 = (SELECT LanguageGUID FROM ministryapp.congregation WHERE CongregationNumber = p_CongregationNumber);
 		SET vAddressGUID0 = UUID();
     
-		INSERT INTO ministryapp.territory (AddressGUID,PlaceID,CongregationNumber,TerritoryNumber,Latitude,Longitude,FormattedAddress,FormattedXYAddress,Type,PhoneType,Language,Notes,Resident,Phone,Building,bPhone,bMulti,bUnit,Unit,bTouched,bLetter,LetterType)
-						     VALUES   (vAddressGUID0,p_PlaceID,p_CongregationNumber,p_TerritoryNumber,p_Latitude,p_Longitude,p_FormattedAddress,p_FormattedXYAddress,'NH','NC',vLanguage0,null,nullif(p_Resident,''),nullif(p_Phone,''),nullif(p_Building,''),p_bPhone,p_bMulti,p_bUnit,nullif(p_Unit,''),0,0,'LNS');
+		INSERT INTO ministryapp.territory (AddressGUID,PlaceID,CongregationNumber,TerritoryNumber,Latitude,Longitude,FormattedAddress,FormattedXYAddress,Type,PhoneType,Language,Notes,Resident,Phone,Building,bPhone,bMulti,bUnit,Unit,bTouched,bLetter,LetterType,iSubmit)
+						     VALUES   (vAddressGUID0,p_PlaceID,p_CongregationNumber,p_TerritoryNumber,p_Latitude,p_Longitude,p_FormattedAddress,p_FormattedXYAddress,'NH','NC',vLanguage0,null,nullif(p_Resident,''),nullif(p_Phone,''),nullif(p_Building,''),p_bPhone,p_bMulti,p_bUnit,nullif(p_Unit,''),0,0,'LNS',0);
                                      
 		INSERT INTO ministryapp.streets (AddressGUID,Street,StreetSuffix)
 						     VALUES (vAddressGUID0,p_Street,p_StreetSuffix);        
@@ -74,8 +74,8 @@ begin
     SET vLanguage = (SELECT LanguageGUID FROM ministryapp.congregation WHERE CongregationNumber = p_CongregationNumber);
     SET vAddressGUID = UUID();
     
-    INSERT INTO ministryapp.territory (AddressGUID,PlaceID,CongregationNumber,TerritoryNumber,Latitude,Longitude,FormattedAddress,FormattedXYAddress,Type,PhoneType,Language,Notes,Resident,Phone,Building,bPhone,bMulti,bUnit,Unit,bTouched,bLetter,LetterType)
-						     VALUES   (vAddressGUID,p_PlaceID,p_CongregationNumber,p_TerritoryNumber,p_Latitude,p_Longitude,p_FormattedAddress,p_FormattedXYAddress,'NH','NC',vLanguage,null,nullif(p_Resident,''),nullif(p_Phone,''),nullif(p_Building,''),p_bPhone,p_bMulti,p_bUnit,nullif(p_Unit,''),0,0,'LNS');
+    INSERT INTO ministryapp.territory (AddressGUID,PlaceID,CongregationNumber,TerritoryNumber,Latitude,Longitude,FormattedAddress,FormattedXYAddress,Type,PhoneType,Language,Notes,Resident,Phone,Building,bPhone,bMulti,bUnit,Unit,bTouched,bLetter,LetterType,iSubmit)
+						     VALUES   (vAddressGUID,p_PlaceID,p_CongregationNumber,p_TerritoryNumber,p_Latitude,p_Longitude,p_FormattedAddress,p_FormattedXYAddress,'NH','NC',vLanguage,null,nullif(p_Resident,''),nullif(p_Phone,''),nullif(p_Building,''),p_bPhone,p_bMulti,p_bUnit,nullif(p_Unit,''),0,0,'LNS',0);
                                      
     INSERT INTO ministryapp.streets (AddressGUID,Street,StreetSuffix)
 						     VALUES (vAddressGUID,p_Street,p_StreetSuffix);  
